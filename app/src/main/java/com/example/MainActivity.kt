@@ -39,15 +39,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplicationTheme {
                 val permissions = mutableListOf(
-                    Manifest.permission.RECORD_AUDIO,
-                    Manifest.permission.MODIFY_AUDIO_SETTINGS
+                    Manifest.permission.RECORD_AUDIO
                 )
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     permissions.add(Manifest.permission.BLUETOOTH_CONNECT)
                     permissions.add(Manifest.permission.BLUETOOTH_SCAN)
                 } else {
-                    permissions.add(Manifest.permission.BLUETOOTH)
-                    permissions.add(Manifest.permission.BLUETOOTH_ADMIN)
                     permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -68,7 +65,13 @@ class MainActivity : ComponentActivity() {
                         DualAudioScreen(viewModel)
                     } else {
                         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                            Text("Please grant permissions to use Dual Audio")
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                Text("Please grant permissions to use Dual Audio")
+                                Spacer(Modifier.height(16.dp))
+                                Button(onClick = { permissionsState.launchMultiplePermissionRequest() }) {
+                                    Text("Grant Permissions")
+                                }
+                            }
                         }
                     }
                 }
