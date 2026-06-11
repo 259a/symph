@@ -1,0 +1,6 @@
+{
+  "name": "Dual Audio",
+  "description": "Simultaneously stream audio to two Bluetooth speakers with independent volume and channel routing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
